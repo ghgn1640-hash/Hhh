@@ -1,0 +1,112 @@
+# Hhh <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINJA MULTI-BYPASS DASHBOARD</title>
+    <style>
+        :root { --neon-green: #00ff41; --bg-dark: #050505; --card-bg: #111; }
+        body { background: var(--bg-dark); color: white; font-family: 'Consolas', monospace; margin: 0; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid var(--neon-green); padding-bottom: 20px; margin-bottom: 30px; }
+        
+        /* Lưới chọn Phân vùng */
+        .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .link-card { 
+            background: var(--card-bg); border: 1px solid #333; padding: 20px; text-align: center; 
+            cursor: pointer; transition: 0.3s; border-radius: 10px;
+        }
+        .link-card:hover { border-color: var(--neon-green); transform: translateY(-5px); box-shadow: 0 0 15px var(--neon-green); }
+        .link-card i { font-size: 40px; display: block; margin-bottom: 10px; }
+        .link-card.active { border-color: #ffd700; background: #1a1a00; }
+
+        /* Khu vực nhập liệu */
+        .input-zone { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid var(--neon-green); max-width: 800px; margin: auto; display: none; }
+        input { width: 100%; padding: 15px; background: #000; border: 1px solid var(--neon-green); color: white; margin-bottom: 15px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--neon-green); color: black; border: none; font-weight: bold; cursor: pointer; }
+        
+        .result-area { margin-top: 20px; padding: 15px; background: #000; border-left: 4px solid var(--neon-green); display: none; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🥷 NINJA BYPASS CONSOLE 🥷</h1>
+    <p>Chọn đúng biểu tượng loại link để bắt đầu "nhàn hạ"!</p>
+</div>
+
+<div class="selection-grid">
+    <div class="link-card" onclick="selectZone('Link4M', 'Vùng 1: Search & Get Code')">
+        <span>🔍</span>
+        <h3>LINK4M / LINK1S</h3>
+    </div>
+    <div class="link-card" onclick="selectZone('Linkvertise', 'Vùng 2: Ads & Discovery')">
+        <span>📢</span>
+        <h3>LINKVERTISE</h3>
+    </div>
+    <div class="link-card" onclick="selectZone('Lootlabs', 'Vùng 2: Ads & Discovery')">
+        <span>💰</span>
+        <h3>LOOTLABS</h3>
+    </div>
+    <div class="link-card" onclick="selectZone('Codex', 'Vùng 3: Key Executor')">
+        <span>🔑</span>
+        <h3>CODEX KEY</h3>
+    </div>
+    <div class="link-card" onclick="selectZone('Delta', 'Vùng 3: Key Executor')">
+        <span>🔺</span>
+        <h3>DELTA KEY</h3>
+    </div>
+    <div class="link-card" onclick="selectZone('Khac', 'Vùng 4: Tổng hợp khác')">
+        <span>📦</span>
+        <h3>KHÁC...</h3>
+    </div>
+</div>
+
+<div id="inputZone" class="input-zone">
+    <h2 id="zoneTitle" style="color: var(--neon-green);"></h2>
+    <p id="zoneDesc" style="font-size: 0.9rem; color: #888;"></p>
+    <input type="text" id="userInput" placeholder="Dán link vào đây...">
+    <button onclick="executeBypass()">BẮT ĐẦU GIẢI MÃ</button>
+
+    <div id="resultArea" class="result-area">
+        <strong>KẾT QUẢ:</strong>
+        <p id="finalCode" style="word-break: break-all; color: #ffd700;"></p>
+        <button onclick="copyResult()" style="background: #333; color: white; padding: 5px;">COPY MÃ</button>
+    </div>
+</div>
+
+<script>
+    let currentMode = "";
+
+    function selectZone(mode, desc) {
+        currentMode = mode;
+        document.getElementById('inputZone').style.display = 'block';
+        document.getElementById('zoneTitle').innerText = "CHẾ ĐỘ: " + mode;
+        document.getElementById('zoneDesc').innerText = desc;
+        document.getElementById('resultArea').style.display = 'none';
+        
+        // Cuộn xuống khu vực nhập
+        window.scrollTo({ top: document.getElementById('inputZone').offsetTop, behavior: 'smooth' });
+    }
+
+    function executeBypass() {
+        const input = document.getElementById('userInput').value;
+        if(!input) return alert("Chưa có link kìa Ninja ơi!");
+
+        // Giả lập xử lý theo từng chế độ
+        document.getElementById('resultArea').style.display = 'block';
+        document.getElementById('finalCode').innerText = "Đang kết nối Server để xử lý " + currentMode + "... Vui lòng đợi!";
+        
+        setTimeout(() => {
+            document.getElementById('finalCode').innerText = "✅ THÀNH CÔNG: Link_Sach_Cua_Ban_Day_123";
+        }, 2000);
+    }
+
+    function copyResult() {
+        const text = document.getElementById('finalCode').innerText;
+        navigator.clipboard.writeText(text);
+        alert("Đã copy!");
+    }
+</script>
+
+</body>
+</html>
